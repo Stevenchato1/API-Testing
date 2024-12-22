@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "7541a870-b18a-4458-bafc-3db97844d14d",
+		"name": "Automatización",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36825596"
+	},
+	"item": [
+		{
+			"name": "create books",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"r_name\",\"{{$randomFullName}}\")\r",
+							"pm.variables.set(\"r_title\",\"{{$randomJobTitle}}\")\r",
+							"pm.variables.set(\"r_isbn\",\"{{$randomAlphaNumeric}}\")"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Declarar variable para almacenar la respuesta JSON\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//Comprobar que trae todo el response\r",
+							"console.log(jsonData.id)\r",
+							"\r",
+							"//Almacenar el valor id en una collectionVariables, environment, variables\r",
+							"pm.environment.set(\"idBooks\",jsonData.id)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"{{r_title}}\",\r\n    \"author\": \"{{r_name}}\",\r\n    \"isbn\": \"{{r_isbn}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/books",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put book by id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Don't Waste Your Life, please!\",\r\n    \"author\": \"John Piper\",\r\n    \"isbn\": \"1593281056\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/books/{{idBooks}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"{{idBooks}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get book by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/books/{{idBooks}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"{{idBooks}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete book by id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/books/{{idBooks}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"{{idBooks}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.request.headers.add({\r",
+					"    key : \"G-TOKEN\",\r",
+					"    value: \"ROM831ESV\"\r",
+					"})"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
