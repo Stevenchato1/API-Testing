@@ -1,0 +1,1987 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "7541a870-b18a-4458-bafc-3db97844d14d",
+      "exporter_id": "36825596"
+    },
+    "item": [
+      {
+        "id": "ba74893c-6429-4a47-820b-92ffd5d94e05",
+        "name": "create books",
+        "request": {
+          "url": {
+            "path": [
+              "books"
+            ],
+            "host": [
+              "{{url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"title\": \"{{r_title}}\",\r\n    \"author\": \"{{r_name}}\",\r\n    \"isbn\": \"{{r_isbn}}\"\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "prerequest",
+            "script": {
+              "id": "c6d26a30-0b6e-4f21-897d-ee1db7266ec4",
+              "type": "text/javascript",
+              "packages": {},
+              "exec": [
+                "pm.variables.set(\"r_name\",\"{{$randomFullName}}\")\r",
+                "pm.variables.set(\"r_title\",\"{{$randomJobTitle}}\")\r",
+                "pm.variables.set(\"r_isbn\",\"{{$randomAlphaNumeric}}\")"
+              ],
+              "_lastExecutionId": "5684776f-10b5-4264-9d3d-ac35c30d83a1"
+            }
+          },
+          {
+            "listen": "test",
+            "script": {
+              "id": "cdfb7971-4666-4e68-87f9-1845553b87ee",
+              "type": "text/javascript",
+              "packages": {},
+              "exec": [
+                "//Declarar variable para almacenar la respuesta JSON\r",
+                "var jsonData = pm.response.json();\r",
+                "\r",
+                "//Comprobar que trae todo el response\r",
+                "console.log(jsonData.id)\r",
+                "\r",
+                "//Almacenar el valor id en una collectionVariables, environment, variables\r",
+                "pm.environment.set(\"idBooks\",jsonData.id)"
+              ],
+              "_lastExecutionId": "ef259835-a441-4487-b572-09866862eb5e"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fe7687df-f58f-41db-a9e8-0d3436d5cd83",
+        "name": "put book by id",
+        "request": {
+          "url": {
+            "path": [
+              "books",
+              "{{idBooks}}"
+            ],
+            "host": [
+              "{{url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "PUT",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"title\": \"Don't Waste Your Life, please!\",\r\n    \"author\": \"John Piper\",\r\n    \"isbn\": \"1593281056\"\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "auth": {
+            "type": "basic",
+            "basic": [
+              {
+                "type": "string",
+                "value": "admin",
+                "key": "password"
+              },
+              {
+                "type": "string",
+                "value": "admin",
+                "key": "username"
+              }
+            ]
+          }
+        },
+        "response": [],
+        "event": []
+      },
+      {
+        "id": "b11aab5f-0e60-4534-8113-4297ff2b1620",
+        "name": "get book by id",
+        "request": {
+          "url": {
+            "path": [
+              "books",
+              "{{idBooks}}"
+            ],
+            "host": [
+              "{{url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": []
+      },
+      {
+        "id": "0849e6d8-df32-483e-a55b-14b8265a5202",
+        "name": "delete book by id",
+        "request": {
+          "url": {
+            "path": [
+              "books",
+              "{{idBooks}}"
+            ],
+            "host": [
+              "{{url}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "DELETE",
+          "body": {
+            "mode": "raw",
+            "raw": "",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "auth": {
+            "type": "basic",
+            "basic": [
+              {
+                "type": "string",
+                "value": "admin",
+                "key": "password"
+              },
+              {
+                "type": "string",
+                "value": "admin",
+                "key": "username"
+              }
+            ]
+          }
+        },
+        "response": [],
+        "event": []
+      }
+    ],
+    "event": [
+      {
+        "listen": "prerequest",
+        "script": {
+          "id": "351bce52-237b-463b-94ba-901831ae92fa",
+          "type": "text/javascript",
+          "packages": {},
+          "exec": [
+            "pm.request.headers.add({\r",
+            "    key : \"G-TOKEN\",\r",
+            "    value: \"ROM831ESV\"\r",
+            "})"
+          ],
+          "_lastExecutionId": "d78fd716-fd15-478f-9713-1502d4e20c95"
+        }
+      },
+      {
+        "listen": "test",
+        "script": {
+          "id": "e8faa971-8ea8-45c6-8616-8cd9fc784b0f",
+          "type": "text/javascript",
+          "packages": {},
+          "exec": [
+            ""
+          ],
+          "_lastExecutionId": "348bdc59-e0fb-4a32-8e68-8e2eae93ac31"
+        }
+      }
+    ],
+    "variable": [],
+    "info": {
+      "_postman_id": "7541a870-b18a-4458-bafc-3db97844d14d",
+      "name": "Automatización",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment",
+      "postman_exported_at": "2024-12-22T01:11:52.796Z",
+      "postman_exported_using": "Postman/11.23.3"
+    },
+    "id": "629de567-be5a-4334-b4ec-7b5fba33e0bd",
+    "name": "Dev",
+    "values": [
+      {
+        "type": "any",
+        "value": "",
+        "key": "id_users"
+      },
+      {
+        "type": "any",
+        "value": "http://localhost:3000",
+        "key": "url"
+      },
+      {
+        "type": "any",
+        "value": 46,
+        "key": "idBooks"
+      }
+    ]
+  },
+  "globals": {
+    "id": "bf2d51af-6615-453d-a8d4-2460ed5fdba8",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 10,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 5,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 78.25,
+      "responseMin": 37,
+      "responseMax": 119,
+      "responseSd": 34.90970495435331,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1736518859484,
+      "completed": 1736518860293
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 4,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "54dc14e4-5e67-448e-939b-41a5668945b7",
+          "httpRequestId": "be278486-14bf-45a7-b200-5938de889a21"
+        },
+        "item": {
+          "id": "ba74893c-6429-4a47-820b-92ffd5d94e05",
+          "name": "create books",
+          "request": {
+            "url": {
+              "path": [
+                "books"
+              ],
+              "host": [
+                "{{url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"{{r_title}}\",\r\n    \"author\": \"{{r_name}}\",\r\n    \"isbn\": \"{{r_isbn}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "c6d26a30-0b6e-4f21-897d-ee1db7266ec4",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.variables.set(\"r_name\",\"{{$randomFullName}}\")\r",
+                  "pm.variables.set(\"r_title\",\"{{$randomJobTitle}}\")\r",
+                  "pm.variables.set(\"r_isbn\",\"{{$randomAlphaNumeric}}\")"
+                ],
+                "_lastExecutionId": "5684776f-10b5-4264-9d3d-ac35c30d83a1"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "cdfb7971-4666-4e68-87f9-1845553b87ee",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "//Declarar variable para almacenar la respuesta JSON\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "//Comprobar que trae todo el response\r",
+                  "console.log(jsonData.id)\r",
+                  "\r",
+                  "//Almacenar el valor id en una collectionVariables, environment, variables\r",
+                  "pm.environment.set(\"idBooks\",jsonData.id)"
+                ],
+                "_lastExecutionId": "ef259835-a441-4487-b572-09866862eb5e"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "books"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "G-TOKEN",
+              "value": "ROM831ESV"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "21fc8766-8713-474d-8ce9-76a06054d3f5",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "99",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"title\": \"Senior Accounts Supervisor\",\r\n    \"author\": \"Herbert Sanford\",\r\n    \"isbn\": \"y\"\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "fbc05bc3-39bc-4c1c-9021-470b1dc1c3f6",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin, X-HTTP-Method-Override, Accept-Encoding"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "-1"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "Location"
+            },
+            {
+              "key": "Location",
+              "value": "http://localhost:3000/books/46"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "285"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"11d-EiKCOJX5k6SemHVtBv3ehEYdd3c\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 10 Jan 2025 14:20:59 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              32,
+              34,
+              83,
+              101,
+              110,
+              105,
+              111,
+              114,
+              32,
+              65,
+              99,
+              99,
+              111,
+              117,
+              110,
+              116,
+              115,
+              32,
+              83,
+              117,
+              112,
+              101,
+              114,
+              118,
+              105,
+              115,
+              111,
+              114,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              32,
+              34,
+              72,
+              101,
+              114,
+              98,
+              101,
+              114,
+              116,
+              32,
+              83,
+              97,
+              110,
+              102,
+              111,
+              114,
+              100,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              115,
+              98,
+              110,
+              34,
+              58,
+              32,
+              34,
+              121,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              65,
+              116,
+              34,
+              58,
+              32,
+              34,
+              50,
+              48,
+              50,
+              53,
+              45,
+              48,
+              49,
+              45,
+              49,
+              48,
+              84,
+              49,
+              52,
+              58,
+              50,
+              48,
+              58,
+              53,
+              57,
+              46,
+              54,
+              51,
+              54,
+              90,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              117,
+              112,
+              100,
+              97,
+              116,
+              101,
+              100,
+              65,
+              116,
+              34,
+              58,
+              32,
+              34,
+              50,
+              48,
+              50,
+              53,
+              45,
+              48,
+              49,
+              45,
+              49,
+              48,
+              84,
+              49,
+              52,
+              58,
+              50,
+              48,
+              58,
+              53,
+              57,
+              46,
+              54,
+              51,
+              54,
+              90,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              100,
+              34,
+              58,
+              32,
+              52,
+              54,
+              44,
+              10,
+              32,
+              32,
+              34,
+              108,
+              105,
+              110,
+              107,
+              115,
+              34,
+              58,
+              32,
+              91,
+              10,
+              32,
+              32,
+              32,
+              32,
+              123,
+              10,
+              32,
+              32,
+              32,
+              32,
+              32,
+              32,
+              34,
+              114,
+              101,
+              108,
+              34,
+              58,
+              32,
+              34,
+              115,
+              101,
+              108,
+              102,
+              34,
+              44,
+              10,
+              32,
+              32,
+              32,
+              32,
+              32,
+              32,
+              34,
+              104,
+              114,
+              101,
+              102,
+              34,
+              58,
+              32,
+              34,
+              104,
+              116,
+              116,
+              112,
+              58,
+              47,
+              47,
+              108,
+              111,
+              99,
+              97,
+              108,
+              104,
+              111,
+              115,
+              116,
+              58,
+              51,
+              48,
+              48,
+              48,
+              47,
+              98,
+              111,
+              111,
+              107,
+              115,
+              47,
+              52,
+              54,
+              34,
+              10,
+              32,
+              32,
+              32,
+              32,
+              125,
+              10,
+              32,
+              32,
+              93,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 106,
+          "responseSize": 285
+        },
+        "id": "ba74893c-6429-4a47-820b-92ffd5d94e05"
+      },
+      {
+        "cursor": {
+          "ref": "ea797396-d8cd-4870-b7c6-c5ff8a5710ba",
+          "length": 4,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "089f6eab-268b-4ae0-81d6-be5b2eff5236"
+        },
+        "item": {
+          "id": "fe7687df-f58f-41db-a9e8-0d3436d5cd83",
+          "name": "put book by id",
+          "request": {
+            "url": {
+              "path": [
+                "books",
+                "{{idBooks}}"
+              ],
+              "host": [
+                "{{url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Don't Waste Your Life, please!\",\r\n    \"author\": \"John Piper\",\r\n    \"isbn\": \"1593281056\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "type": "string",
+                  "value": "admin",
+                  "key": "password"
+                },
+                {
+                  "type": "string",
+                  "value": "admin",
+                  "key": "username"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "books",
+              "46"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "G-TOKEN",
+              "value": "ROM831ESV"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "Authorization",
+              "value": "Basic YWRtaW46YWRtaW4=",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "d11f06ec-4f6a-4d58-8a42-6a5d75f41679",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "107",
+              "system": true
+            }
+          ],
+          "method": "PUT",
+          "body": {
+            "mode": "raw",
+            "raw": "{\r\n    \"title\": \"Don't Waste Your Life, please!\",\r\n    \"author\": \"John Piper\",\r\n    \"isbn\": \"1593281056\"\r\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "auth": {
+            "type": "basic",
+            "basic": [
+              {
+                "type": "string",
+                "value": "admin",
+                "key": "password"
+              },
+              {
+                "type": "string",
+                "value": "admin",
+                "key": "username"
+              }
+            ]
+          }
+        },
+        "response": {
+          "id": "73435360-c514-4351-896f-28078bdfd4dc",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin, Accept-Encoding"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "-1"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "293"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"125-I0PXFuLb35M+co1SpW9cd+U4Jkg\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 10 Jan 2025 14:20:59 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              32,
+              34,
+              68,
+              111,
+              110,
+              39,
+              116,
+              32,
+              87,
+              97,
+              115,
+              116,
+              101,
+              32,
+              89,
+              111,
+              117,
+              114,
+              32,
+              76,
+              105,
+              102,
+              101,
+              44,
+              32,
+              112,
+              108,
+              101,
+              97,
+              115,
+              101,
+              33,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              32,
+              34,
+              74,
+              111,
+              104,
+              110,
+              32,
+              80,
+              105,
+              112,
+              101,
+              114,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              115,
+              98,
+              110,
+              34,
+              58,
+              32,
+              34,
+              49,
+              53,
+              57,
+              51,
+              50,
+              56,
+              49,
+              48,
+              53,
+              54,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              65,
+              116,
+              34,
+              58,
+              32,
+              34,
+              50,
+              48,
+              50,
+              53,
+              45,
+              48,
+              49,
+              45,
+              49,
+              48,
+              84,
+              49,
+              52,
+              58,
+              50,
+              48,
+              58,
+              53,
+              57,
+              46,
+              54,
+              51,
+              54,
+              90,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              117,
+              112,
+              100,
+              97,
+              116,
+              101,
+              100,
+              65,
+              116,
+              34,
+              58,
+              32,
+              34,
+              50,
+              48,
+              50,
+              53,
+              45,
+              48,
+              49,
+              45,
+              49,
+              48,
+              84,
+              49,
+              52,
+              58,
+              50,
+              48,
+              58,
+              53,
+              57,
+              46,
+              56,
+              53,
+              48,
+              90,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              100,
+              34,
+              58,
+              32,
+              52,
+              54,
+              44,
+              10,
+              32,
+              32,
+              34,
+              108,
+              105,
+              110,
+              107,
+              115,
+              34,
+              58,
+              32,
+              91,
+              10,
+              32,
+              32,
+              32,
+              32,
+              123,
+              10,
+              32,
+              32,
+              32,
+              32,
+              32,
+              32,
+              34,
+              114,
+              101,
+              108,
+              34,
+              58,
+              32,
+              34,
+              115,
+              101,
+              108,
+              102,
+              34,
+              44,
+              10,
+              32,
+              32,
+              32,
+              32,
+              32,
+              32,
+              34,
+              104,
+              114,
+              101,
+              102,
+              34,
+              58,
+              32,
+              34,
+              104,
+              116,
+              116,
+              112,
+              58,
+              47,
+              47,
+              108,
+              111,
+              99,
+              97,
+              108,
+              104,
+              111,
+              115,
+              116,
+              58,
+              51,
+              48,
+              48,
+              48,
+              47,
+              98,
+              111,
+              111,
+              107,
+              115,
+              47,
+              52,
+              54,
+              34,
+              10,
+              32,
+              32,
+              32,
+              32,
+              125,
+              10,
+              32,
+              32,
+              93,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 51,
+          "responseSize": 293
+        },
+        "id": "fe7687df-f58f-41db-a9e8-0d3436d5cd83"
+      },
+      {
+        "cursor": {
+          "ref": "5190bb3f-c5b9-443e-8649-925822ac8b3f",
+          "length": 4,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "71888edf-dd5e-4ce0-b070-29095c91d766"
+        },
+        "item": {
+          "id": "b11aab5f-0e60-4534-8113-4297ff2b1620",
+          "name": "get book by id",
+          "request": {
+            "url": {
+              "path": [
+                "books",
+                "{{idBooks}}"
+              ],
+              "host": [
+                "{{url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": []
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "books",
+              "46"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "G-TOKEN",
+              "value": "ROM831ESV"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "a11ad1d3-f014-4d87-9dcc-f2a1f54cc6b6",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "ec8d798e-b850-4fa9-bf8b-f76617df3488",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin, Accept-Encoding"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "-1"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "293"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"125-I0PXFuLb35M+co1SpW9cd+U4Jkg\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 10 Jan 2025 14:21:00 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              32,
+              34,
+              68,
+              111,
+              110,
+              39,
+              116,
+              32,
+              87,
+              97,
+              115,
+              116,
+              101,
+              32,
+              89,
+              111,
+              117,
+              114,
+              32,
+              76,
+              105,
+              102,
+              101,
+              44,
+              32,
+              112,
+              108,
+              101,
+              97,
+              115,
+              101,
+              33,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              32,
+              34,
+              74,
+              111,
+              104,
+              110,
+              32,
+              80,
+              105,
+              112,
+              101,
+              114,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              115,
+              98,
+              110,
+              34,
+              58,
+              32,
+              34,
+              49,
+              53,
+              57,
+              51,
+              50,
+              56,
+              49,
+              48,
+              53,
+              54,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              99,
+              114,
+              101,
+              97,
+              116,
+              101,
+              100,
+              65,
+              116,
+              34,
+              58,
+              32,
+              34,
+              50,
+              48,
+              50,
+              53,
+              45,
+              48,
+              49,
+              45,
+              49,
+              48,
+              84,
+              49,
+              52,
+              58,
+              50,
+              48,
+              58,
+              53,
+              57,
+              46,
+              54,
+              51,
+              54,
+              90,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              117,
+              112,
+              100,
+              97,
+              116,
+              101,
+              100,
+              65,
+              116,
+              34,
+              58,
+              32,
+              34,
+              50,
+              48,
+              50,
+              53,
+              45,
+              48,
+              49,
+              45,
+              49,
+              48,
+              84,
+              49,
+              52,
+              58,
+              50,
+              48,
+              58,
+              53,
+              57,
+              46,
+              56,
+              53,
+              48,
+              90,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              100,
+              34,
+              58,
+              32,
+              52,
+              54,
+              44,
+              10,
+              32,
+              32,
+              34,
+              108,
+              105,
+              110,
+              107,
+              115,
+              34,
+              58,
+              32,
+              91,
+              10,
+              32,
+              32,
+              32,
+              32,
+              123,
+              10,
+              32,
+              32,
+              32,
+              32,
+              32,
+              32,
+              34,
+              114,
+              101,
+              108,
+              34,
+              58,
+              32,
+              34,
+              115,
+              101,
+              108,
+              102,
+              34,
+              44,
+              10,
+              32,
+              32,
+              32,
+              32,
+              32,
+              32,
+              34,
+              104,
+              114,
+              101,
+              102,
+              34,
+              58,
+              32,
+              34,
+              104,
+              116,
+              116,
+              112,
+              58,
+              47,
+              47,
+              108,
+              111,
+              99,
+              97,
+              108,
+              104,
+              111,
+              115,
+              116,
+              58,
+              51,
+              48,
+              48,
+              48,
+              47,
+              98,
+              111,
+              111,
+              107,
+              115,
+              47,
+              52,
+              54,
+              34,
+              10,
+              32,
+              32,
+              32,
+              32,
+              125,
+              10,
+              32,
+              32,
+              93,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 37,
+          "responseSize": 293
+        },
+        "id": "b11aab5f-0e60-4534-8113-4297ff2b1620"
+      },
+      {
+        "cursor": {
+          "ref": "89b2221c-06a7-43da-a6e8-de5c8b2064f6",
+          "length": 4,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "b559c997-9ad4-4130-9b86-32e79a881ae8"
+        },
+        "item": {
+          "id": "0849e6d8-df32-483e-a55b-14b8265a5202",
+          "name": "delete book by id",
+          "request": {
+            "url": {
+              "path": [
+                "books",
+                "{{idBooks}}"
+              ],
+              "host": [
+                "{{url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "type": "string",
+                  "value": "admin",
+                  "key": "password"
+                },
+                {
+                  "type": "string",
+                  "value": "admin",
+                  "key": "username"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": []
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "books",
+              "46"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "G-TOKEN",
+              "value": "ROM831ESV"
+            },
+            {
+              "key": "Authorization",
+              "value": "Basic YWRtaW46YWRtaW4=",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "c27c4a20-3aac-4ce1-a56d-59ac6059b35f",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE",
+          "body": {
+            "mode": "raw",
+            "raw": "",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "auth": {
+            "type": "basic",
+            "basic": [
+              {
+                "type": "string",
+                "value": "admin",
+                "key": "password"
+              },
+              {
+                "type": "string",
+                "value": "admin",
+                "key": "username"
+              }
+            ]
+          }
+        },
+        "response": {
+          "id": "74a9fa80-ce28-408b-969b-d64126e35811",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "-1"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 10 Jan 2025 14:21:00 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 119,
+          "responseSize": 0
+        },
+        "id": "0849e6d8-df32-483e-a55b-14b8265a5202"
+      }
+    ],
+    "transfers": {
+      "responseTotal": 871
+    },
+    "failures": [],
+    "error": null
+  }
+}
