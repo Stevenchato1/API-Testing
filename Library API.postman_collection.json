@@ -105,7 +105,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"{{book}}\",\r\n    \"isbn\": \"{{isbn}}\",\r\n    \"aisle\": \"227121\",\r\n    \"author\": \"{{author}}\"\r\n}",
+					"raw": "{\r\n    \"name\": \"{{book}}\",\r\n    \"isbn\": \"12345\",\r\n    \"aisle\": \"227121\",\r\n    \"author\": \"{{author}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
