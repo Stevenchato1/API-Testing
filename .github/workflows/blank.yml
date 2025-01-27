@@ -1,0 +1,41 @@
+name: Postman API Testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  api-testing:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    # Step 3: Install Newman
+    - name: Install Newman
+      run: npm install -g newman
+
+    # Step 4: Run Postman Collection
+    - name: Run Postman Collection
+      run: |
+        newman run Library_API.postman_collection.json \
+          -e environment.json \
+          -r cli,html \
+          --reporter-html-export newman-report.html
+
+    # Step 5: Upload HTML Report
+    - name: Upload HTML Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: newman-html-report
+        path: newman-report.html
